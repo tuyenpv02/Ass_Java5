@@ -40,7 +40,7 @@ public class Login {
 
     @GetMapping("")
     public String login(Model model){
-        model.addAttribute("username","admin");
+        model.addAttribute("username","kh1");
         model.addAttribute("password","123");
         return "login";
     }

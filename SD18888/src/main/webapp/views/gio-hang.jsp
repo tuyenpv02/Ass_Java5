@@ -37,6 +37,9 @@
                                         <div class="py-2 text-uppercase">Số Lượng</div>
                                     </th>
                                     <th scope="col" class="border-0 bg-light">
+                                        <div class="py-2 text-uppercase">Tổng tiền</div>
+                                    </th>
+                                    <th scope="col" class="border-0 bg-light">
                                         <div class="py-2 text-uppercase">Xóa</div>
                                     </th>
                                 </tr>
@@ -54,16 +57,21 @@
                                                 </div>
                                             </div>
                                         </th>
-                                        <td class="align-middle"><strong>${o.donGia * o.soLuong}</strong></td>
+                                        <td class="align-middle"><strong>${o.donGia}</strong></td>
                                         <td class="align-middle">
-<%--                                            <a href="/admin/hoa-don-chi-tiet/update-cart/truSoLuong/${o.chiTietSP.id}&&${o.hoaDon.id}"">--%>
-<%--                                            <button class="btnSub">-</button>--%>
-<%--                                            </a>--%>
+
+                                            <a href="/admin/hoa-don-chi-tiet/update-cart/truSoLuong/${o.chiTietSP.id}">
+                                                <button class="btnSub">-</button>
+                                            </a>
+
                                             <strong>${o.soLuong}</strong>
-<%--                                            <a href="/admin/hoa-don-chi-tiet/update-cart/themSoLuong/${o.chiTietSP.id}&&${o.hoaDon.id}"">--%>
-<%--                                            <button class="btnAdd">+</button>--%>
-<%--                                            </a>--%>
+
+                                            <a href="/admin/hoa-don-chi-tiet/update-cart/themSoLuong/${o.chiTietSP.id}">
+                                                <button class="btnAdd">+</button>
+                                            </a>
+
                                         </td>
+                                        <td class="align-middle"><strong>${o.donGia * o.soLuong}</strong></td>
                                         <td class="align-middle"><a href="#" class="text-dark">
                                             <a href="/admin/hoa-don-chi-tiet/delete-cart/${o.chiTietSP.id}"
                                                class="btn btn-danger">Delete</a>
@@ -79,52 +87,36 @@
                 </div>
 
                 <div class="row py-5 p-4 bg-white rounded shadow-sm">
-                    <div class="col-lg-6">
+                    <div class="col">
                         <c:if test="${ empty sessionScope.kh }">
                         <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Hóa đơn</div>
 
                         <div class="p-4">
                             <div class="input-group mb-4 border rounded-pill p-2">
-                                <%--                                <input type="text" placeholder="Nhập Voucher" aria-describedby="button-addon3" class="form-control border-0">--%>
-                                <%--                                <div class="input-group-append border-0">--%>
-                                <%--                                    <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Sử dụng</button>--%>
-                                <%--                                </div>--%>
-
 
                                 <form action="/gio-hang/loc" method="get">
                                     <label>Trạng thái</label>
-                                    <%--                                    <div class="col-12">--%>
-                                    <%--                                        <select class="" name="sapXep">--%>
-                                    <%--                                            <option selected value="tatCa">tất cả</option>--%>
-                                    <%--                                            <option value="chua">Chưa thanh toán</option>--%>
-                                    <%--                                            <option value="da">Đã thanh toán</option>--%>
-                                    <%--                                            <option value="huy">Huỷe</option>--%>
-                                    <%--                                        </select>--%>
-                                    <%--                                        <button class="">lọc</button>--%>
-                                    <%--                                    </div>--%>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-secondary active">
-                                            <input type="radio" name="trangThai" value="3"  autocomplete="off" checked>
+                                            <input type="radio" name="trangThai" value="3" autocomplete="off" checked>
                                             tất cả
                                         </label>
                                         <label class="btn btn-secondary">
-                                            <input type="radio" name="trangThai" value="0" autocomplete="off"> chưa thanh toán
+                                            <input type="radio" name="trangThai" value="0" autocomplete="off"> chưa
+                                            thanh toán
                                         </label>
                                         <label class="btn btn-secondary">
-                                            <input type="radio" name="trangThai" value="1" autocomplete="off"> đã thanh toán
+                                            <input type="radio" name="trangThai" value="1" autocomplete="off"> đã thanh
+                                            toán
                                         </label>
                                         <label class="btn btn-secondary">
                                             <input type="radio" name="trangThai" value="2" autocomplete="off"> hủy
                                         </label>
                                     </div>
                                     <button class="btn btn-primary btn-sm">lọc</button>
-
                                 </form>
-
-                                        <a class="btn btn-primary btn-sm m-1 " href="admin/hoa-don/add-ma-moi">tạo hóa đơn</a>
-
+                                <a class="btn btn-primary btn-sm m-1 " href="admin/hoa-don/add-ma-moi">tạo hóa đơn</a>
                                 <br>
-
                                 <table class="table ">
                                     <thead class="table-primary">
                                     <tr>
@@ -135,8 +127,6 @@
                                         <th>tình trạng</th>
                                         <th>action</th>
                                     </tr>
-
-
                                     </thead>
                                     <%int i = 0;%>
                                     <tbody>
@@ -159,7 +149,7 @@
                         </div>
                     </div>
                     </c:if>
-                    <div class="col-lg-6">
+                    <div class="col">
                         <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Thành tiền</div>
                         <div class="p-4">
                             <ul class="list-unstyled mb-4">
@@ -199,10 +189,10 @@
                             </ul>
                             <a href="/admin/hoa-don/thanh-toan-ma/${maHoaDon}"
                                class="btn btn-dark rounded-pill py-2 btn-block">Mua hàng</a>
-                           <c:if test="${ not empty sessionScope.acc  }">
-                               <a href="/admin/hoa-don/huy-ma/${maHoaDon}"
-                                  class="btn btn-dark rounded-pill py-2 btn-block">Hủy</a>
-                           </c:if>
+                            <c:if test="${ not empty sessionScope.acc  }">
+                                <a href="/admin/hoa-don/huy-ma/${maHoaDon}"
+                                   class="btn btn-dark rounded-pill py-2 btn-block">Hủy</a>
+                            </c:if>
 
                         </div>
                     </div>

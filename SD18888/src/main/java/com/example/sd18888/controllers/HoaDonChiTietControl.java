@@ -40,22 +40,22 @@ public class HoaDonChiTietControl {
     public String deleteCart(
             @PathVariable("id1") ChiTietSP chiTietSP,
             Model model
-            ){
+    ) {
         session = request.getSession();
-        KhachHang khachHang =(KhachHang) session.getAttribute("kh");
-        NhanVien nhanVien =(NhanVien) session.getAttribute("acc");
+        KhachHang khachHang = (KhachHang) session.getAttribute("kh");
+        NhanVien nhanVien = (NhanVien) session.getAttribute("acc");
         String ma = (String) session.getAttribute("maHoaDon");
 
-        if(khachHang !=null){
+        if (khachHang != null) {
             GioHang gioHang = gioHangReopsitory.findByMa(ma);
 
-            GioHangChiTietID gioHangChiTietID = new GioHangChiTietID(gioHang,chiTietSP);
+            GioHangChiTietID gioHangChiTietID = new GioHangChiTietID(gioHang, chiTietSP);
 
             GHCT ghct = this.gioHangChiTietRepository.getReferenceById(gioHangChiTietID);
 
             this.gioHangChiTietRepository.delete(ghct);
         }
-        if(nhanVien != null) {
+        if (nhanVien != null) {
             HoaDon hoaDon = hoaDonRepository.findHoaDonByMa(ma);
             if (hoaDon.getTinhTrang() == 1 || hoaDon.getTinhTrang() == 2) {
                 session.setAttribute("valid", "hóa đơn đã xử lý");
@@ -69,39 +69,79 @@ public class HoaDonChiTietControl {
         return "redirect:/gio-hang";
     }
 
-    @GetMapping("/update-cart/themSoLuong/{id1}&&{id2}")
+    @GetMapping("/update-cart/themSoLuong/{id1}")
     public String themSoLuong(
-            @PathVariable("id1") ChiTietSP chiTietSP,
-            @PathVariable("id2") HoaDon hoaDon
-    ){
-        if(hoaDon.getTinhTrang()==1 || hoaDon.getTinhTrang()==2){
-            session.setAttribute("valid","hóa đơn đã xử lý");
-            return "redirect:/gio-hang";
+            @PathVariable("id1") ChiTietSP chiTietSP
+    ) {
+        session = request.getSession();
+        KhachHang khachHang = (KhachHang) session.getAttribute("kh");
+        NhanVien nhanVien = (NhanVien) session.getAttribute("acc");
+        String ma = (String) session.getAttribute("maHoaDon");
+
+        if (khachHang != null) {
+            GioHang gioHang = gioHangReopsitory.findByMa(ma);
+
+            GioHangChiTietID gioHangChiTietID = new GioHangChiTietID(gioHang, chiTietSP);
+
+            GHCT ghct = this.gioHangChiTietRepository.getReferenceById(gioHangChiTietID);
+            ghct.setSoLuong(ghct.getSoLuong()+1);
+            this.gioHangChiTietRepository.save(ghct);
         }
-        HoaDonChiTietID hoaDonChiTietID = new HoaDonChiTietID(hoaDon,chiTietSP);
-        HDCT hdct = this.hoaDonChiTietRepository.getReferenceById(hoaDonChiTietID);
-            hdct.setSoLuong(hdct.getSoLuong()+1);
-        this.hoaDonChiTietRepository.save(hdct);
+        if (nhanVien != null) {
+            HoaDon hoaDon = hoaDonRepository.findHoaDonByMa(ma);
+
+            if (hoaDon.getTinhTrang() == 1 || hoaDon.getTinhTrang() == 2) {
+                session.setAttribute("valid", "hóa đơn đã xử lý");
+                return "redirect:/gio-hang";
+            }
+            HoaDonChiTietID hoaDonChiTietID = new HoaDonChiTietID(hoaDon, chiTietSP);
+            HDCT hdct = this.hoaDonChiTietRepository.getReferenceById(hoaDonChiTietID);
+            hdct.setSoLuong(hdct.getSoLuong() + 1);
+            this.hoaDonChiTietRepository.save(hdct);
+        }
+
         return "redirect:/gio-hang";
     }
 
-    @GetMapping("/update-cart/truSoLuong/{id1}&&{id2}")
+    @GetMapping("/update-cart/truSoLuong/{id1}")
     public String truSoLuong(
-            @PathVariable("id1") ChiTietSP chiTietSP,
-            @PathVariable("id2") HoaDon hoaDon
-    ){
-        if(hoaDon.getTinhTrang()==1 || hoaDon.getTinhTrang()==2){
-            session.setAttribute("valid","hóa đơn đã xử lý");
-            return "redirect:/gio-hang";
+            @PathVariable("id1") ChiTietSP chiTietSP
+    ) {
+        session = request.getSession();
+        KhachHang khachHang = (KhachHang) session.getAttribute("kh");
+        NhanVien nhanVien = (NhanVien) session.getAttribute("acc");
+        String ma = (String) session.getAttribute("maHoaDon");
+
+        if (khachHang != null) {
+            GioHang gioHang = gioHangReopsitory.findByMa(ma);
+
+            GioHangChiTietID gioHangChiTietID = new GioHangChiTietID(gioHang, chiTietSP);
+
+            GHCT ghct = this.gioHangChiTietRepository.getReferenceById(gioHangChiTietID);
+            ghct.setSoLuong(ghct.getSoLuong()-1);
+            if (ghct.getSoLuong() == 0) {
+                this.gioHangChiTietRepository.delete(ghct);
+                return "redirect:/gio-hang";
+            }
+            this.gioHangChiTietRepository.save(ghct);
         }
-        HoaDonChiTietID hoaDonChiTietID = new HoaDonChiTietID(hoaDon,chiTietSP);
-        HDCT hdct = this.hoaDonChiTietRepository.getReferenceById(hoaDonChiTietID);
-            hdct.setSoLuong(hdct.getSoLuong()-1);
-            if(hdct.getSoLuong()==0){
+        if (nhanVien != null) {
+            HoaDon hoaDon = hoaDonRepository.findHoaDonByMa(ma);
+            if (hoaDon.getTinhTrang() == 1 || hoaDon.getTinhTrang() == 2) {
+                session.setAttribute("valid", "hóa đơn đã xử lý");
+                return "redirect:/gio-hang";
+            }
+            HoaDonChiTietID hoaDonChiTietID = new HoaDonChiTietID(hoaDon, chiTietSP);
+            HDCT hdct = this.hoaDonChiTietRepository.getReferenceById(hoaDonChiTietID);
+            hdct.setSoLuong(hdct.getSoLuong() - 1);
+            if (hdct.getSoLuong() == 0) {
                 this.hoaDonChiTietRepository.delete(hdct);
                 return "redirect:/gio-hang";
             }
-        this.hoaDonChiTietRepository.save(hdct);
+            this.hoaDonChiTietRepository.save(hdct);
+        }
+
+
         return "redirect:/gio-hang";
     }
 
