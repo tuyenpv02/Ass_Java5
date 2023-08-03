@@ -75,11 +75,8 @@ public class GioHangControl {
 //                }
 //                model.addAttribute("tongTien",tongTienHang);
 //            }
-//
 //            model.addAttribute("listHDCT", lstHDCT);
-//
 //            model.addAttribute("maHoaDon", ma);
-
         }
 
         if (nhanVien != null) {
@@ -99,10 +96,10 @@ public class GioHangControl {
             }
 
             // lay hd theo ma-> lay ds hdct theo ma hd -> load
-//            Integer check= (Integer) session.getAttribute("checkGioHang");
-//            if(check == 0 || check ==null){
-//                lstHDCT = new ArrayList<>();
-//            }
+            // Integer check= (Integer) session.getAttribute("checkGioHang");
+            // if(check == 0 || check ==null){
+            // lstHDCT = new ArrayList<>();
+            // }
             model.addAttribute("listHDCT", lstHDCT);
             model.addAttribute("maHoaDon", ma);
 
@@ -122,7 +119,7 @@ public class GioHangControl {
                 }
             }
 
-//        Sort sortByMa = Sort.by(Sort.Direction.DESC,"ma");
+            // Sort sortByMa = Sort.by(Sort.Direction.DESC,"ma");
             model.addAttribute("lstHoaDon", lstHoaDon);
         }
 
@@ -176,7 +173,7 @@ public class GioHangControl {
 
 
         if (ma.trim().length() <= 0) {
-// ko co ma
+            // ko co ma
             if (khachHang != null) {
                 List<GioHang> lstGioHang = this.gioHangReopsitory.findByKhachHang(khachHang);
                 GioHang gioHang1 = new GioHang();
@@ -189,7 +186,7 @@ public class GioHangControl {
                     gioHang1 = lstGioHang.get(0);
                 }
 
-//
+                //
                 GioHangChiTietID gioHangChiTietID = new GioHangChiTietID(gioHang1, chiTietSP);
                 GHCT ghct = new GHCT();
                 ghct.setId(gioHangChiTietID);
