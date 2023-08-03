@@ -32,48 +32,47 @@ public class HoaDonControl {
 
     @Autowired
     HttpServletRequest request;
+
     @Autowired
     private GioHangReopsitory gioHangReopsitory;
 
     @Autowired
     private GioHangChiTietRepository gioHangChiTietRepository;
+
     @Autowired
     HttpSession session;
 
     @GetMapping("index")
-    public String index(Model model){
+    public String index(Model model) {
         List<HoaDon> ds = this.hoaDonRepository.findAll();
-
-        model.addAttribute("lstHoaDon",ds);
+        model.addAttribute("lstHoaDon", ds);
         return "admin/HoaDon/index";
     }
 
     @GetMapping("chonHD/{id}")
     public String chonHoaDon(
-            @PathVariable("id")HoaDon hoaDon
+            @PathVariable("id") HoaDon hoaDon
     ) {
         //
         // load ra gio hang + setMa hd( setSession maHD) the o hd
-
         session.setAttribute("maHoaDon", hoaDon.getMa());
         session.removeAttribute("valid");
-
         return "redirect:/gio-hang";
     }
 
     @GetMapping("thanh-toan-ma/{ma}")
     public String updateTrangThai(
-            @PathVariable("ma")String ma
-    ){
-        NhanVien nhanVien =(NhanVien) session.getAttribute("acc");
-        KhachHang khachHang =(KhachHang) session.getAttribute("kh");
+            @PathVariable("ma") String ma
+    ) {
+        NhanVien nhanVien = (NhanVien) session.getAttribute("acc");
+        KhachHang khachHang = (KhachHang) session.getAttribute("kh");
 
-        if(ma==null || ma.trim().equals("")){
-            session.setAttribute("valid","mời chọn hóa đơn");
+        if (ma == null || ma.trim().equals("")) {
+            session.setAttribute("valid", "mời chọn hóa đơn");
             return "redirect:/gio-hang";
         }
 
-        if(khachHang != null){
+        if (khachHang != null) {
             // từ khách hàng - > lấy ra ds giỏ hàng
             // tao hoa don + add idkh
             // lay lst hoa don de tao hd với mã tự sinh
@@ -82,9 +81,9 @@ public class HoaDonControl {
             HoaDon hoaDonMoi1 = taoHoaDonMoi();
             hoaDonMoi1.setKhachHang(khachHang);
 
-            HoaDon hoaDonMoi2  = this.hoaDonRepository.save(hoaDonMoi1);
+            HoaDon hoaDonMoi2 = this.hoaDonRepository.save(hoaDonMoi1);
 
-            GioHang  gioHang = this.gioHangReopsitory.findByMa(ma);
+            GioHang gioHang = this.gioHangReopsitory.findByMa(ma);
             List<GioHangChiTiet> ds = gioHang.getGioHangChiTiets();
 
             HoaDonChiTietID hoaDonChiTietID = new HoaDonChiTietID();
@@ -93,7 +92,7 @@ public class HoaDonControl {
             GioHangChiTietID gioHangChiTietID = new GioHangChiTietID();
             gioHangChiTietID.setGioHang(gioHang);
 
-            for(GioHangChiTiet g:ds){
+            for (GioHangChiTiet g : ds) {
                 hoaDonChiTietID.setChiTietSP(g.getChiTietSP());
                 gioHangChiTietID.setChiTietSP(g.getChiTietSP());
 
@@ -109,15 +108,14 @@ public class HoaDonControl {
 
                 this.gioHangChiTietRepository.delete(ghct);
             }
-
 //            hoaDonMoi2.setTinhTrang(0);
             return "redirect:/khach-hang-home";
         }
 
         HoaDon hoaDon = this.hoaDonRepository.findHoaDonByMa(ma);
-        if(khachHang ==null){
+        if (khachHang == null) {
             hoaDon.setTinhTrang(1);
-        }else{
+        } else {
             hoaDon.setTinhTrang(0);
         }
         hoaDon.setNhanVien(nhanVien);
@@ -130,16 +128,13 @@ public class HoaDonControl {
 
     @GetMapping("huy-ma/{ma}")
     public String updateHuy(
-            @PathVariable("ma")String ma
-    ){
-        NhanVien nhanVien =(NhanVien) session.getAttribute("acc");
-        KhachHang khachHang =(KhachHang) session.getAttribute("kh");
-//        if(nhanVien == null){
-//            session.setAttribute("login","chưa đăng nhập");
-//            return "redirect:/admin";
-//        }
-        if(ma==null || ma.trim().length()<=0){
-            session.setAttribute("valid","mời chọn hóa đơn");
+            @PathVariable("ma") String ma
+    ) {
+        NhanVien nhanVien = (NhanVien) session.getAttribute("acc");
+        KhachHang khachHang = (KhachHang) session.getAttribute("kh");
+
+        if (ma == null || ma.trim().length() <= 0) {
+            session.setAttribute("valid", "mời chọn hóa đơn");
             return "redirect:/gio-hang";
         }
         HoaDon hoaDon = this.hoaDonRepository.findHoaDonByMa(ma);
@@ -159,9 +154,7 @@ public class HoaDonControl {
         for (HoaDon d : this.hoaDonRepository.findAll()) {
             maHD = d.getMa().substring(2); // tra ve String con bat dau tu 2 ~'d'
             lstMax.add(Integer.parseInt(maHD));
-//            System.out.println("num "+Integer.parseInt(maHD));
         }
-
         // sort
         Collections.sort(lstMax, (o1, o2) -> o2.compareTo(o1));
         return lstMax.get(0) + 1;
@@ -171,8 +164,8 @@ public class HoaDonControl {
         HoaDon hoaDon = new HoaDon();
         hoaDon.setMa("HD" + getMaxHD());
         hoaDon.setTinhTrang(0);
-        long millis=System.currentTimeMillis();
-        java.sql.Date d=new java.sql.Date(millis);
+        long millis = System.currentTimeMillis();
+        java.sql.Date d = new java.sql.Date(millis);
         hoaDon.setNgayTao(d);
         return hoaDon;
     }
@@ -180,10 +173,10 @@ public class HoaDonControl {
 
     @GetMapping("add-ma-moi")
     public String updateTrangThai(
-    ){
-        NhanVien nhanVien =(NhanVien) session.getAttribute("acc");
-        if(nhanVien == null){
-            session.setAttribute("login","chưa đăng nhập");
+    ) {
+        NhanVien nhanVien = (NhanVien) session.getAttribute("acc");
+        if (nhanVien == null) {
+            session.setAttribute("login", "chưa đăng nhập");
             return "redirect:/admin";
         }
         HoaDon hoaDon = taoHoaDonMoi();
@@ -192,7 +185,6 @@ public class HoaDonControl {
         this.hoaDonRepository.save(hoaDon);
         return "redirect:/gio-hang";
     }
-
 
 
 }

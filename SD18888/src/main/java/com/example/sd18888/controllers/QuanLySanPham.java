@@ -44,23 +44,20 @@ public class QuanLySanPham {
     @GetMapping("")
     public String quanLySanPham(
             Model model,
-            @RequestParam(value = "page", defaultValue = "0")Integer pageNo
-    ){
+            @RequestParam(value = "page", defaultValue = "0") Integer pageNo
+    ) {
 
         model.addAttribute("lstSanPham", this.spRepo.findAll());
         model.addAttribute("lstNSX", this.nsxRepo.findAll());
         model.addAttribute("lstMauSac", this.msRepo.findAll());
         model.addAttribute("lstDongSP", this.dspRepo.findAll());
 
-        Sort sort = (Sort.by(Sort.Direction.ASC,"giaBan"));
-        Pageable pageable = PageRequest.of(pageNo,3,sort);
+        Sort sort = (Sort.by(Sort.Direction.ASC, "giaBan"));
+        Pageable pageable = PageRequest.of(pageNo, 3, sort);
         Page<ChiTietSP> chiTietSPPagepage = this.chiTietSPRepo.findAll(pageable);
-
 //        List<ChiTietSP> ds = page.getContent();
-
 //        model.addAttribute("totalPage",page.getTotalPages());
-
-        model.addAttribute("listProduct",chiTietSPPagepage);
+        model.addAttribute("listProduct", chiTietSPPagepage);
         return "ql_san_pham";
     }
 
@@ -75,16 +72,13 @@ public class QuanLySanPham {
     @PostMapping("add")
     public String store(
             ChiTietSPVM chiTietSPVM
-//            @RequestParam("mauSac")MauSac m
-            ) {
-        System.out.println("msss "+chiTietSPVM.toString());
-//        System.out.println("msss "+m.toString());
-            ChiTietSP chiTietSP = new ChiTietSP();
-            chiTietSP.loadChiTietSPViewModel(chiTietSPVM);
-            this.chiTietSPRepo.save(chiTietSP);
-            return "redirect:/admin/quan-ly-san-pham";
+    ) {
+        System.out.println("msss " + chiTietSPVM.toString());
+        ChiTietSP chiTietSP = new ChiTietSP();
+        chiTietSP.loadChiTietSPViewModel(chiTietSPVM);
+        this.chiTietSPRepo.save(chiTietSP);
+        return "redirect:/admin/quan-ly-san-pham";
     }
-
 
 
 }

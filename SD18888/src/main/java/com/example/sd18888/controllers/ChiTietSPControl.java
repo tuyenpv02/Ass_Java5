@@ -70,7 +70,7 @@ public class ChiTietSPControl {
             BindingResult result,
             Model model
     ) {
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             model.addAttribute("lstSanPham", this.spRepo.findAll());
             model.addAttribute("lstNSX", this.nsxRepo.findAll());
             model.addAttribute("lstMauSac", this.msRepo.findAll());
@@ -79,7 +79,7 @@ public class ChiTietSPControl {
             model.addAttribute("data", chiTietSPVM);
             model.addAttribute("action", "/admin/chi-tiet-sp/store");
             return "admin/chi_tiet_sp/create";
-        }else{
+        } else {
             ChiTietSP chiTietSP = new ChiTietSP();
             chiTietSP.loadChiTietSPViewModel(chiTietSPVM);
             this.chiTietSPRepo.save(chiTietSP);
@@ -89,9 +89,9 @@ public class ChiTietSPControl {
 
     @GetMapping("edit/{id}")
     public String edit(
-        @PathVariable("id")ChiTietSP chiTietSP,
-        Model model
-    ){
+            @PathVariable("id") ChiTietSP chiTietSP,
+            Model model
+    ) {
         model.addAttribute("lstSanPham", this.spRepo.findAll());
         model.addAttribute("lstNSX", this.nsxRepo.findAll());
         model.addAttribute("lstMauSac", this.msRepo.findAll());
@@ -99,27 +99,27 @@ public class ChiTietSPControl {
 
         vm.loadChiTietSPDomainModel(chiTietSP);
         model.addAttribute("data", vm);
-        model.addAttribute("action", "/admin/chi-tiet-sp/update/"+chiTietSP.getId());
+        model.addAttribute("action", "/admin/chi-tiet-sp/update/" + chiTietSP.getId());
         return "admin/chi_tiet_sp/create";
     }
 
     @PostMapping("update/{id}")
     public String update(
-           @PathVariable("id")ChiTietSP chiTietSP,
-           @Valid @ModelAttribute("data")ChiTietSPVM chiTietSPVM,
-           BindingResult result,
-           Model model
-    ){
-        if(result.hasErrors()){
+            @PathVariable("id") ChiTietSP chiTietSP,
+            @Valid @ModelAttribute("data") ChiTietSPVM chiTietSPVM,
+            BindingResult result,
+            Model model
+    ) {
+        if (result.hasErrors()) {
             model.addAttribute("lstSanPham", this.spRepo.findAll());
             model.addAttribute("lstNSX", this.nsxRepo.findAll());
             model.addAttribute("lstMauSac", this.msRepo.findAll());
             model.addAttribute("lstDongSP", this.dspRepo.findAll());
 
             model.addAttribute("data", chiTietSPVM);
-            model.addAttribute("action", "/admin/chi-tiet-sp/update/"+chiTietSP.getId());
+            model.addAttribute("action", "/admin/chi-tiet-sp/update/" + chiTietSP.getId());
             return "admin/chi_tiet_sp/create";
-        }else{
+        } else {
 
             chiTietSP.loadChiTietSPViewModel(chiTietSPVM);
             this.chiTietSPRepo.save(chiTietSP);

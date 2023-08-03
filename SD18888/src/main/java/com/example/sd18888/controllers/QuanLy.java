@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class QuanLy {
 
     @GetMapping("")
-    public String index(){
+    public String index() {
 
-        return"quan_ly";
+        return "quan_ly";
     }
 }

@@ -35,59 +35,54 @@ public class NhanVienControl {
     private NhanVienVM vm;
 
     @GetMapping("index")
-    public String index (Model model){
+    public String index(Model model) {
         List<NhanVien> lstNhanVien = this.nvRepo.findAll();
-        model.addAttribute("lstNhanVien",lstNhanVien);
+        model.addAttribute("lstNhanVien", lstNhanVien);
         return "admin/nhan_vien/index";
     }
 
     @GetMapping("delete")
     public String delete(
             @RequestParam("id") UUID id
-    ){
-//        Optional<NhanVien> nv = this.nvRepo.findById(id);
-//        System.out.println("delete "+nv.get().toString());
+    ) {
         this.nvRepo.deleteById(id);
         return "redirect:/admin/nhan-vien/index";
     }
 
     @GetMapping("create")
-    public String create(Model model){
+    public String create(Model model) {
         List<ChucVu> lstChucVu = this.cvRepo.findAll();
         List<CuaHang> lstCuaHang = this.chRepo.findAll();
 
-        model.addAttribute("lstCuaHang",lstCuaHang);
-        model.addAttribute("lstChucVu",lstChucVu);
+        model.addAttribute("lstCuaHang", lstCuaHang);
+        model.addAttribute("lstChucVu", lstChucVu);
 
         vm = new NhanVienVM();
-        model.addAttribute("data",vm);
+        model.addAttribute("data", vm);
 
-        model.addAttribute("action","/admin/nhan-vien/store");
+        model.addAttribute("action", "/admin/nhan-vien/store");
         return "admin/nhan_vien/create";
     }
 
     @PostMapping("store")
     public String store(
-            @Valid @ModelAttribute("data")NhanVienVM nhanVienVM,
+            @Valid @ModelAttribute("data") NhanVienVM nhanVienVM,
             BindingResult result,
             Model model
-    ){
-        if(result.hasErrors()){
+    ) {
+        if (result.hasErrors()) {
             List<ChucVu> lstChucVu = this.cvRepo.findAll();
             List<CuaHang> lstCuaHang = this.chRepo.findAll();
 
-            model.addAttribute("lstCuaHang",lstCuaHang);
-            model.addAttribute("lstChucVu",lstChucVu);
+            model.addAttribute("lstCuaHang", lstCuaHang);
+            model.addAttribute("lstChucVu", lstChucVu);
 
-            model.addAttribute("data",nhanVienVM);
-            model.addAttribute("action","/admin/nhan-vien/store");
+            model.addAttribute("data", nhanVienVM);
+            model.addAttribute("action", "/admin/nhan-vien/store");
             return "admin/nhan_vien/create";
-        }else{
+        } else {
             NhanVien nv = new NhanVien();
             nv.loadFormViewModel(nhanVienVM);
-//            System.out.println("----------"+nhanVienVM.toString());
-//            System.out.println("----------"+nv.toString());
-
             this.nvRepo.save(nv);
             return "redirect:/admin/nhan-vien/index";
         }
@@ -95,41 +90,36 @@ public class NhanVienControl {
 
     @GetMapping("edit/{id}")
     public String edit(
-            @PathVariable("id")NhanVien nhanVien,
+            @PathVariable("id") NhanVien nhanVien,
             Model model
-    ){
+    ) {
         List<ChucVu> lstChucVu = this.cvRepo.findAll();
         List<CuaHang> lstCuaHang = this.chRepo.findAll();
 
-        model.addAttribute("lstCuaHang",lstCuaHang);
-        model.addAttribute("lstChucVu",lstChucVu);
-
-//        vm = new NhanVienVM();
-        model.addAttribute("data",nhanVien);
-
-        model.addAttribute("action","/admin/nhan-vien/update/"+nhanVien.getId());
+        model.addAttribute("lstCuaHang", lstCuaHang);
+        model.addAttribute("lstChucVu", lstChucVu);
+        model.addAttribute("data", nhanVien);
+        model.addAttribute("action", "/admin/nhan-vien/update/" + nhanVien.getId());
         return "admin/nhan_vien/create";
     }
 
     @PostMapping("update/{id}")
     public String update(
-            @PathVariable("id")NhanVien nhanVien,
-            @Valid @ModelAttribute("data")NhanVienVM nhanVienVM,
+            @PathVariable("id") NhanVien nhanVien,
+            @Valid @ModelAttribute("data") NhanVienVM nhanVienVM,
             BindingResult result,
             Model model
-    ){
-        if(result.hasErrors()){
+    ) {
+        if (result.hasErrors()) {
             List<ChucVu> lstChucVu = this.cvRepo.findAll();
             List<CuaHang> lstCuaHang = this.chRepo.findAll();
 
-            model.addAttribute("lstCuaHang",lstCuaHang);
-            model.addAttribute("lstChucVu",lstChucVu);
+            model.addAttribute("lstCuaHang", lstCuaHang);
+            model.addAttribute("lstChucVu", lstChucVu);
 
-            System.out.println("lỗi ");
-
-            model.addAttribute("action","/admin/nhan-vien/update/"+nhanVien.getId());
+            model.addAttribute("action", "/admin/nhan-vien/update/" + nhanVien.getId());
             return "admin/nhan_vien/create";
-        }else{
+        } else {
             System.out.println("ttt lỗi ");
             nhanVien.loadFormViewModel(nhanVienVM);
             this.nvRepo.save(nhanVien);

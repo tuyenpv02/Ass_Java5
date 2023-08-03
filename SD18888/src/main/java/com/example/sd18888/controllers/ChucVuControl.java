@@ -27,40 +27,38 @@ public class ChucVuControl {
     private ChucVuVM vm;
 
     @GetMapping("index")
-    public String index(Model model){
+    public String index(Model model) {
         List<ChucVu> lstChucVu = this.cvRepo.findAll();
-        model.addAttribute("lstChucVu",lstChucVu);
+        model.addAttribute("lstChucVu", lstChucVu);
         return "admin/chuc_vu/index";
     }
 
     @GetMapping("delete")
     public String delete(
-            @RequestParam("id")UUID id
-    ){
-//        System.out.println("delete "+id);
-//        List<ChucVu> d = this.cvRepo.findAllById(id);
-//        System.out.println("delete "+this.cvRepo.findAllById(id));
+            @RequestParam("id") UUID id
+    ) {
         this.cvRepo.deleteById(id);
         return "redirect:/admin/chuc-vu/index";
     }
+
     @GetMapping("create")
-    public String create(Model model){
+    public String create(Model model) {
         vm = new ChucVuVM();
-        model.addAttribute("data",vm);
-        model.addAttribute("action","/admin/chuc-vu/store");
+        model.addAttribute("data", vm);
+        model.addAttribute("action", "/admin/chuc-vu/store");
         return "admin/chuc_vu/submit";
     }
 
     @PostMapping("store")
     public String store(
-           @Valid @ModelAttribute("data")ChucVuVM cvVM,
-           BindingResult result,
-           Model model
-    ){
-        if(result.hasErrors()){
-            model.addAttribute("action","/admin/chuc-vu/store");
+            @Valid @ModelAttribute("data") ChucVuVM cvVM,
+            BindingResult result,
+            Model model
+    ) {
+        if (result.hasErrors()) {
+            model.addAttribute("action", "/admin/chuc-vu/store");
             return "admin/chuc_vu/submit";
-        }else{
+        } else {
             ChucVu cv = new ChucVu();
             cv.loadChucVuVM(cvVM);
             this.cvRepo.save(cv);
@@ -70,32 +68,31 @@ public class ChucVuControl {
 
     @GetMapping("edit/{id}")
     public String edit(
-            @PathVariable("id")ChucVu cv,
+            @PathVariable("id") ChucVu cv,
             Model model
-    ){
+    ) {
         vm.loadChucVuDomainModel(cv);
-        model.addAttribute("data",vm);
-        model.addAttribute("action","/admin/chuc-vu/update/"+cv.getId());
+        model.addAttribute("data", vm);
+        model.addAttribute("action", "/admin/chuc-vu/update/" + cv.getId());
         return "admin/chuc_vu/submit";
     }
 
     @PostMapping("update/{id}")
     public String update(
-            @PathVariable("id")ChucVu cv,
+            @PathVariable("id") ChucVu cv,
             @Valid @ModelAttribute("data") ChucVuVM cvVM,
             BindingResult result, // BindingResult phải để sau @Valid
             Model model
-    ){
-        if(result.hasErrors()){
-            model.addAttribute("action","/admin/chuc-vu/update/"+cv.getId());
+    ) {
+        if (result.hasErrors()) {
+            model.addAttribute("action", "/admin/chuc-vu/update/" + cv.getId());
             return "admin/chuc_vu/submit";
-        }else{
+        } else {
             System.out.println("vao day");
             cv.loadChucVuVM(cvVM);
             this.cvRepo.save(cv);
             return "redirect:/admin/chuc-vu/index";
         }
     }
-
 
 }

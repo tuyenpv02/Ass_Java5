@@ -24,38 +24,38 @@ public class MauSacControl {
     private MauSacVM vm;
 
     @GetMapping("index")
-    public String index(Model model){
+    public String index(Model model) {
         List<MauSac> lstMauSac = this.mauSacRepository.findAll();
-        model.addAttribute("lstMauSac",lstMauSac);
+        model.addAttribute("lstMauSac", lstMauSac);
         return "admin/mau_sac/index";
     }
 
     @GetMapping("delete")
     public String delete(
             @RequestParam("id") UUID id
-    ){
+    ) {
         this.mauSacRepository.deleteById(id);
         return "redirect:/admin/mau-sac/index";
     }
 
     @GetMapping("create")
-    public String create(Model model){
+    public String create(Model model) {
         vm = new MauSacVM();
-        model.addAttribute("data",vm);
-        model.addAttribute("action","/admin/mau-sac/store");
+        model.addAttribute("data", vm);
+        model.addAttribute("action", "/admin/mau-sac/store");
         return "admin/mau_sac/create";
     }
 
     @PostMapping("store")
     public String store(
-            @Valid @ModelAttribute("data")MauSacVM spVM,
+            @Valid @ModelAttribute("data") MauSacVM spVM,
             BindingResult result,
             Model model
-    ){
-        if(result.hasErrors()){
-            model.addAttribute("action","/admin/mau-sac/store");
+    ) {
+        if (result.hasErrors()) {
+            model.addAttribute("action", "/admin/mau-sac/store");
             return "admin/mau_sac/create";
-        }else{
+        } else {
             MauSac cv = new MauSac();
             cv.loadMauSacViewModel(spVM);
             this.mauSacRepository.save(cv);
@@ -65,26 +65,26 @@ public class MauSacControl {
 
     @GetMapping("edit/{id}")
     public String edit(
-            @PathVariable("id")MauSac sp,
+            @PathVariable("id") MauSac sp,
             Model model
-    ){
+    ) {
         vm.loadMauSacDomainModel(sp);
-        model.addAttribute("data",vm);
-        model.addAttribute("action","/admin/mau-sac/update/"+sp.getId());
+        model.addAttribute("data", vm);
+        model.addAttribute("action", "/admin/mau-sac/update/" + sp.getId());
         return "admin/mau_sac/create";
     }
 
     @PostMapping("update/{id}")
     public String update(
-            @PathVariable("id")MauSac ms,
+            @PathVariable("id") MauSac ms,
             @Valid @ModelAttribute("data") MauSacVM spVM,
             BindingResult result, // BindingResult phải để sau @Valid
             Model model
-    ){
-        if(result.hasErrors()){
-            model.addAttribute("action","/admin/mau-sac/update/"+ms.getId());
+    ) {
+        if (result.hasErrors()) {
+            model.addAttribute("action", "/admin/mau-sac/update/" + ms.getId());
             return "admin/mau_sac/create";
-        }else{
+        } else {
             ms.loadMauSacViewModel(spVM);
             this.mauSacRepository.save(ms);
             return "redirect:/admin/mau-sac/index";

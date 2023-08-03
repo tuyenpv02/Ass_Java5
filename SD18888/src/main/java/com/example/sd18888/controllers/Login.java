@@ -39,44 +39,38 @@ public class Login {
     HttpSession session;
 
     @GetMapping("")
-    public String login(Model model){
-        model.addAttribute("username","kh1");
-        model.addAttribute("password","123");
+    public String login(Model model) {
+        model.addAttribute("username", "kh1");
+        model.addAttribute("password", "123");
         return "login";
     }
 
     @GetMapping("logout")
-    public String logout(){
-         session = request.getSession();
+    public String logout() {
+        session = request.getSession();
         session.removeAttribute("acc");
         session.removeAttribute("kh");
         session.removeAttribute("checkGioHang");
         session.removeAttribute("maHoaDon");
-
-
-//        NhanVien nhanVien =(NhanVien) session.getAttribute("acc");
-//        System.out.println(nhanVien.getId());
-//        System.out.println(nhanVien.getMa());
         return "redirect:/login";
     }
 
     @PostMapping("")
     public String checkLogin(
-            @RequestParam("username")String username,
-            @RequestParam("password")String password,
+            @RequestParam("username") String username,
+            @RequestParam("password") String password,
             @RequestParam("remember") Optional<String> remember,
             Model model
-    ){
-        NhanVien nhanVien = this.nvRepo.findByMaAndMatKhau(username,password);
-        KhachHang khachHang = this.khRepo.findByMaAndMatKhau(username,password);
-        if(nhanVien == null){
-//            model.addAttribute("valid","vaild");
-            if(khachHang==null){
+    ) {
+        NhanVien nhanVien = this.nvRepo.findByMaAndMatKhau(username, password);
+        KhachHang khachHang = this.khRepo.findByMaAndMatKhau(username, password);
+        if (nhanVien == null) {
+            if (khachHang == null) {
                 return "login";
-            }else{
+            } else {
                 session = request.getSession();
-                session.setAttribute("kh",khachHang);
-                session.setAttribute("checkGioHang",0);
+                session.setAttribute("kh", khachHang);
+                session.setAttribute("checkGioHang", 0);
 
                 List<GioHang> lstGioHang = this.gioHangReopsitory.findByKhachHang(khachHang);
                 GioHang gioHang1 = new GioHang();
@@ -92,15 +86,15 @@ public class Login {
                 session.removeAttribute("login");
                 return "redirect:/khach-hang-home";
             }
-        }else {
-             session = request.getSession();
-            session.setAttribute("acc",nhanVien);
-            session.setAttribute("checkGioHang",0);
-
+        } else {
+            session = request.getSession();
+            session.setAttribute("acc", nhanVien);
+            session.setAttribute("checkGioHang", 0);
             session.removeAttribute("login");
             return "redirect:/admin";
         }
     }
+
     public GioHang toaGioHangMoi(KhachHang khachHang) {
         GioHang gioHang = new GioHang();
         gioHang.setMa("GH0" + khachHang.getMa());
@@ -110,5 +104,4 @@ public class Login {
         gioHang.setNgayTao(d);
         return gioHang;
     }
-
 }

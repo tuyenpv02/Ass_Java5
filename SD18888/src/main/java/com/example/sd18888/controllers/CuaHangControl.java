@@ -24,42 +24,39 @@ public class CuaHangControl {
     private CuaHangVM vm;
 
     @GetMapping("index")
-    public String index(Model model)
-    {
+    public String index(Model model) {
         List<CuaHang> lstCuaHang = this.chRepo.findAll();
-
-        model.addAttribute("lstCuaHang",lstCuaHang);
+        model.addAttribute("lstCuaHang", lstCuaHang);
         return "admin/cua_hang/index";
     }
 
     @GetMapping("delete/{id}")
     public String delete(
-            @PathVariable("id")CuaHang cuaHang
-    ){
-//        System.out.println("delete "+cuaHang.getId());
+            @PathVariable("id") CuaHang cuaHang
+    ) {
         this.chRepo.delete(cuaHang);
         return "redirect:/admin/cua-hang/index";
     }
 
     @GetMapping("create")
     public String create(Model model
-    ){
+    ) {
         vm = new CuaHangVM();
-        model.addAttribute("data",vm);
-        model.addAttribute("action","/admin/cua-hang/store");
+        model.addAttribute("data", vm);
+        model.addAttribute("action", "/admin/cua-hang/store");
         return "admin/cua_hang/create";
     }
 
     @PostMapping("store")
     public String store(
-            @Valid @ModelAttribute("data")CuaHangVM cuaHangVM,
+            @Valid @ModelAttribute("data") CuaHangVM cuaHangVM,
             BindingResult result,
             Model model
-            ){
-        if(result.hasErrors()){
-            model.addAttribute("action","/admin/cua-hang/store");
+    ) {
+        if (result.hasErrors()) {
+            model.addAttribute("action", "/admin/cua-hang/store");
             return "admin/cua_hang/create";
-        }else{
+        } else {
             CuaHang cuaHang = new CuaHang();
             cuaHang.loadCuaHangVM(cuaHangVM);
             this.chRepo.save(cuaHang);
@@ -69,33 +66,32 @@ public class CuaHangControl {
 
     @GetMapping("edit/{id}")
     public String edit(
-            @PathVariable("id")CuaHang ch,
+            @PathVariable("id") CuaHang ch,
             Model model
-    ){
-            vm.loadFromDomainModel(ch);
-            model.addAttribute("data",vm);
-            model.addAttribute("action","/admin/cua-hang/update/"+ch.getId());
+    ) {
+        vm.loadFromDomainModel(ch);
+        model.addAttribute("data", vm);
+        model.addAttribute("action", "/admin/cua-hang/update/" + ch.getId());
         return "admin/cua_hang/create";
     }
 
     @PostMapping("update/{id}")
     public String update(
-            @PathVariable("id")CuaHang ch,
+            @PathVariable("id") CuaHang ch,
             @Valid @ModelAttribute("data") CuaHangVM chVM,
             BindingResult result,
             Model model
 
-    ){
-        if(result.hasErrors()){
-            model.addAttribute("data",chVM);
-            model.addAttribute("action","/admin/cua-hang/update/"+ch.getId());
+    ) {
+        if (result.hasErrors()) {
+            model.addAttribute("data", chVM);
+            model.addAttribute("action", "/admin/cua-hang/update/" + ch.getId());
             return "admin/cua_hang/create";
-        }else{
+        } else {
             ch.loadCuaHangVM(chVM);
             this.chRepo.save(ch);
             return "redirect:/admin/cua-hang/index";
         }
     }
-
 
 }

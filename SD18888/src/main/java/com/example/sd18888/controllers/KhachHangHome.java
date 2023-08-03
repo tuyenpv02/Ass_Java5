@@ -45,55 +45,52 @@ public class KhachHangHome {
     HttpSession session;
 
     @GetMapping("gio-hang")
-    public String khachHangGH(Model model){
+    public String khachHangGH(Model model) {
         session = request.getSession();
         String ma = (String) session.getAttribute("maHoaDon");
 
-        KhachHang khachHang =(KhachHang) session.getAttribute("kh");
-        if(khachHang ==null){
-            session.setAttribute("login","chưa đăng nhập");
+        KhachHang khachHang = (KhachHang) session.getAttribute("kh");
+        if (khachHang == null) {
+            session.setAttribute("login", "chưa đăng nhập");
             return "redirect:/khach-hang-home";
         }
 
-        session.setAttribute("login","kh đăng nhập");
+        session.setAttribute("login", "kh đăng nhập");
         List<GioHangChiTiet> gioHangChiTiets = new ArrayList<>();
         List<GioHang> gioHangList = this.gioHangReopsitory.findByKhachHang(khachHang);
-        if(ma == null || ma.trim().length() <=0){
-            if(gioHangList.size()<=0){
+        if (ma == null || ma.trim().length() <= 0) {
+            if (gioHangList.size() <= 0) {
 
-            }else{
+            } else {
                 gioHangChiTiets = gioHangList.get(0).getGioHangChiTiets();
             }
 
-        }else{
+        } else {
             GioHang gioHang = gioHangReopsitory.findByMa(ma);
 
             gioHangChiTiets = gioHang.getGioHangChiTiets();
             DecimalFormat decimalFormat = new DecimalFormat("##.##");
             Double tongTienHang = 0.00;
-            for (GioHangChiTiet h: gioHangChiTiets){
-                tongTienHang +=h.getDonGia()*h.getSoLuong();
+            for (GioHangChiTiet h : gioHangChiTiets) {
+                tongTienHang += h.getDonGia() * h.getSoLuong();
             }
-            model.addAttribute("tongTien",tongTienHang);
-
+            model.addAttribute("tongTien", tongTienHang);
         }
         model.addAttribute("listHDCT", gioHangChiTiets);
-
         model.addAttribute("maHoaDon", ma);
-
         return "gio-hang";
     }
 
     @GetMapping("")
     public String hienThiHomeKH(Model model
-            , @RequestParam(value = "page",defaultValue = "0")Integer pageNo) {
+            , @RequestParam(value = "page", defaultValue = "0") Integer pageNo) {
         session = request.getSession();
         String ma = (String) session.getAttribute("maHoaDon");
         if (ma == null) {
             session.setAttribute("maHoaDon", "");
         }
-        Pageable pageable = PageRequest.of(pageNo,6);
-        Page<ChiTietSP> ds=this.chiTietSPRepository.findAll(pageable);
+        Pageable pageable = PageRequest.of(pageNo, 6);
+        Page<ChiTietSP> ds = this.chiTietSPRepository.findAll(pageable);
 
         model.addAttribute("lstDongSP", this.dspRepo.findAll());
         model.addAttribute("lstChiTietSP", ds);
@@ -177,7 +174,6 @@ public class KhachHangHome {
         }
         return "redirect:/khach-hang-home";
     }
-
 }
 
 

@@ -23,38 +23,38 @@ public class DongSPControl {
     private DongSPVM vm;
 
     @GetMapping("index")
-    public String index(Model model){
+    public String index(Model model) {
         List<DongSP> lstDongSP = this.dongSPRepository.findAll();
-        model.addAttribute("lstDongSP",lstDongSP);
+        model.addAttribute("lstDongSP", lstDongSP);
         return "admin/dong_sp/index";
     }
 
     @GetMapping("delete")
     public String delete(
             @RequestParam("id") UUID id
-    ){
+    ) {
         this.dongSPRepository.deleteById(id);
         return "redirect:/admin/dong-san-pham/index";
     }
 
     @GetMapping("create")
-    public String create(Model model){
+    public String create(Model model) {
         vm = new DongSPVM();
-        model.addAttribute("data",vm);
-        model.addAttribute("action","/admin/dong-san-pham/store");
+        model.addAttribute("data", vm);
+        model.addAttribute("action", "/admin/dong-san-pham/store");
         return "admin/dong_sp/create";
     }
 
     @PostMapping("store")
     public String store(
-            @Valid @ModelAttribute("data")DongSPVM spVM,
+            @Valid @ModelAttribute("data") DongSPVM spVM,
             BindingResult result,
             Model model
-    ){
-        if(result.hasErrors()){
-            model.addAttribute("action","/admin/dong-san-pham/store");
+    ) {
+        if (result.hasErrors()) {
+            model.addAttribute("action", "/admin/dong-san-pham/store");
             return "admin/dong_sp/create";
-        }else{
+        } else {
             DongSP cv = new DongSP();
             cv.loadDongSPViewModel(spVM);
             this.dongSPRepository.save(cv);
@@ -64,26 +64,26 @@ public class DongSPControl {
 
     @GetMapping("edit/{id}")
     public String edit(
-            @PathVariable("id")DongSP sp,
+            @PathVariable("id") DongSP sp,
             Model model
-    ){
+    ) {
         vm.loadDongSPDomainModel(sp);
-        model.addAttribute("data",vm);
-        model.addAttribute("action","/admin/dong-san-pham/update/"+sp.getId());
+        model.addAttribute("data", vm);
+        model.addAttribute("action", "/admin/dong-san-pham/update/" + sp.getId());
         return "admin/dong_sp/create";
     }
 
     @PostMapping("update/{id}")
     public String update(
-            @PathVariable("id")DongSP sp,
+            @PathVariable("id") DongSP sp,
             @Valid @ModelAttribute("data") DongSPVM spVM,
             BindingResult result, // BindingResult phải để sau @Valid
             Model model
-    ){
-        if(result.hasErrors()){
-            model.addAttribute("action","/admin/dong-san-pham/update/"+sp.getId());
+    ) {
+        if (result.hasErrors()) {
+            model.addAttribute("action", "/admin/dong-san-pham/update/" + sp.getId());
             return "admin/dong_sp/create";
-        }else{
+        } else {
             System.out.println("vao day");
             sp.loadDongSPViewModel(spVM);
             this.dongSPRepository.save(sp);

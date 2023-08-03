@@ -32,7 +32,7 @@
 <!--end of menu-->
 <div class="container">
 
-    <jsp:include page="danh_muc.jsp"></jsp:include>
+<%--    <jsp:include page="danh_muc.jsp"></jsp:include>--%>
 <%--    <div class="row">--%>
 <%--        <div class="col">--%>
 <%--            <nav aria-label="breadcrumb">--%>

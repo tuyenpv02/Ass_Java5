@@ -65,7 +65,6 @@ public class HoaDonChiTietControl {
             HDCT hdct = this.hoaDonChiTietRepository.getReferenceById(hoaDonChiTietID);
             this.hoaDonChiTietRepository.delete(hdct);
         }
-
         return "redirect:/gio-hang";
     }
 
@@ -84,7 +83,7 @@ public class HoaDonChiTietControl {
             GioHangChiTietID gioHangChiTietID = new GioHangChiTietID(gioHang, chiTietSP);
 
             GHCT ghct = this.gioHangChiTietRepository.getReferenceById(gioHangChiTietID);
-            ghct.setSoLuong(ghct.getSoLuong()+1);
+            ghct.setSoLuong(ghct.getSoLuong() + 1);
             this.gioHangChiTietRepository.save(ghct);
         }
         if (nhanVien != null) {
@@ -99,7 +98,6 @@ public class HoaDonChiTietControl {
             hdct.setSoLuong(hdct.getSoLuong() + 1);
             this.hoaDonChiTietRepository.save(hdct);
         }
-
         return "redirect:/gio-hang";
     }
 
@@ -118,7 +116,7 @@ public class HoaDonChiTietControl {
             GioHangChiTietID gioHangChiTietID = new GioHangChiTietID(gioHang, chiTietSP);
 
             GHCT ghct = this.gioHangChiTietRepository.getReferenceById(gioHangChiTietID);
-            ghct.setSoLuong(ghct.getSoLuong()-1);
+            ghct.setSoLuong(ghct.getSoLuong() - 1);
             if (ghct.getSoLuong() == 0) {
                 this.gioHangChiTietRepository.delete(ghct);
                 return "redirect:/gio-hang";
@@ -140,8 +138,6 @@ public class HoaDonChiTietControl {
             }
             this.hoaDonChiTietRepository.save(hdct);
         }
-
-
         return "redirect:/gio-hang";
     }
 

@@ -28,8 +28,8 @@ public class GioHangControl {
 
     @Autowired
     private HoaDonRepository hoaDonRepository;
-@Autowired
-private  GioHangReopsitory gioHangReopsitory;
+    @Autowired
+    private GioHangReopsitory gioHangReopsitory;
     @Autowired
     private HoaDonChiTietRepository hoaDonChiTietRepository;
     @Autowired
@@ -37,7 +37,6 @@ private  GioHangReopsitory gioHangReopsitory;
 
     @Autowired
     private KhachHangRepository khachHangRepository;
-
 
     @Autowired
     HttpServletRequest request;
@@ -53,13 +52,13 @@ private  GioHangReopsitory gioHangReopsitory;
         session = request.getSession();
         String ma = (String) session.getAttribute("maHoaDon");
 
-        NhanVien nhanVien =(NhanVien) session.getAttribute("acc");
-        KhachHang khachHang =(KhachHang) session.getAttribute("kh");
-        if(nhanVien == null && khachHang ==null){
-            session.setAttribute("login","chưa đăng nhập");
+        NhanVien nhanVien = (NhanVien) session.getAttribute("acc");
+        KhachHang khachHang = (KhachHang) session.getAttribute("kh");
+        if (nhanVien == null && khachHang == null) {
+            session.setAttribute("login", "chưa đăng nhập");
             return "redirect:/admin";
         }
-        if(khachHang != null){
+        if (khachHang != null) {
             return "redirect:/khach-hang-home/gio-hang";
 //            session.setAttribute("login","kh đăng nhập");
 //            List<HoaDonChiTiet> lstHDCT = new ArrayList<>();
@@ -83,7 +82,7 @@ private  GioHangReopsitory gioHangReopsitory;
 
         }
 
-        if(nhanVien != null){
+        if (nhanVien != null) {
             List<HoaDonChiTiet> lstHDCT = new ArrayList<>();
             if (ma.trim().length() <= 0 || ma == null) {
 
@@ -93,10 +92,10 @@ private  GioHangReopsitory gioHangReopsitory;
 
                 DecimalFormat decimalFormat = new DecimalFormat("##.##");
                 Double tongTienHang = 0.00;
-                for (HoaDonChiTiet h: lstHDCT){
-                    tongTienHang +=h.getDonGia()*h.getSoLuong();
+                for (HoaDonChiTiet h : lstHDCT) {
+                    tongTienHang += h.getDonGia() * h.getSoLuong();
                 }
-                model.addAttribute("tongTien",tongTienHang);
+                model.addAttribute("tongTien", tongTienHang);
             }
 
             // lay hd theo ma-> lay ds hdct theo ma hd -> load
@@ -107,25 +106,24 @@ private  GioHangReopsitory gioHangReopsitory;
             model.addAttribute("listHDCT", lstHDCT);
             model.addAttribute("maHoaDon", ma);
 
-//        List<HoaDon> ds = this.hoaDonRepository.fi
             int tt = 3;
             Integer trangThai = (Integer) session.getAttribute("tinhTrangHD");
             List<HoaDon> lstHoaDon = hoaDonRepository.findAll();
 
-            if(trangThai==null){
+            if (trangThai == null) {
 
-            }else{
-                if(trangThai==1 ){
+            } else {
+                if (trangThai == 1) {
                     lstHoaDon = hoaDonRepository.findByTinhTrang(1);
-                }else if (trangThai==0){
+                } else if (trangThai == 0) {
                     lstHoaDon = hoaDonRepository.findByTinhTrang(0);
-                }else if(trangThai ==2){
+                } else if (trangThai == 2) {
                     lstHoaDon = hoaDonRepository.findByTinhTrang(2);
                 }
             }
 
 //        Sort sortByMa = Sort.by(Sort.Direction.DESC,"ma");
-            model.addAttribute("lstHoaDon",lstHoaDon );
+            model.addAttribute("lstHoaDon", lstHoaDon);
         }
 
         return "gio-hang";
@@ -137,9 +135,7 @@ private  GioHangReopsitory gioHangReopsitory;
         for (HoaDon d : this.hoaDonRepository.findAll()) {
             maHD = d.getMa().substring(2); // tra ve String con bat dau tu 2 ~'d'
             lstMax.add(Integer.parseInt(maHD));
-//            System.out.println("num "+Integer.parseInt(maHD));
         }
-
         // sort
         Collections.sort(lstMax, (o1, o2) -> o2.compareTo(o1));
         return lstMax.get(0) + 1;
@@ -149,12 +145,11 @@ private  GioHangReopsitory gioHangReopsitory;
         HoaDon hoaDon = new HoaDon();
         hoaDon.setMa("HD" + getMaxHD());
         hoaDon.setTinhTrang(0);
-        long millis=System.currentTimeMillis();
-        java.sql.Date d=new java.sql.Date(millis);
-//        Date d = Date.valueOf("2023-06-10");
-//        hoaDon.setNgayTao(d);
+        long millis = System.currentTimeMillis();
+        java.sql.Date d = new java.sql.Date(millis);
         return hoaDon;
     }
+
     public GioHang toaGioHangMoi(KhachHang khachHang) {
         GioHang gioHang = new GioHang();
         gioHang.setMa("GH0" + khachHang.getMa());
@@ -172,41 +167,41 @@ private  GioHangReopsitory gioHangReopsitory;
     ) {
         session = request.getSession();
         String ma = (String) session.getAttribute("maHoaDon");
-        NhanVien nhanVien =(NhanVien) session.getAttribute("acc");
-        KhachHang khachHang =(KhachHang) session.getAttribute("kh");
-        if(nhanVien == null && khachHang ==null){
-            session.setAttribute("login","chưa đăng nhập");
+        NhanVien nhanVien = (NhanVien) session.getAttribute("acc");
+        KhachHang khachHang = (KhachHang) session.getAttribute("kh");
+        if (nhanVien == null && khachHang == null) {
+            session.setAttribute("login", "chưa đăng nhập");
             return "redirect:/admin";
         }
 
 
         if (ma.trim().length() <= 0) {
 // ko co ma
-                if(khachHang != null){
-                    List<GioHang> lstGioHang = this.gioHangReopsitory.findByKhachHang(khachHang);
-                    GioHang gioHang1 = new GioHang();
+            if (khachHang != null) {
+                List<GioHang> lstGioHang = this.gioHangReopsitory.findByKhachHang(khachHang);
+                GioHang gioHang1 = new GioHang();
 
-                    if (lstGioHang.size() <= 0) {
-                        GioHang gioHang = toaGioHangMoi(khachHang);
-                        gioHang.setKhachHang(khachHang);
-                        gioHang1 = this.gioHangReopsitory.save(gioHang);
-                    } else {
-                        gioHang1 = lstGioHang.get(0);
-                    }
+                if (lstGioHang.size() <= 0) {
+                    GioHang gioHang = toaGioHangMoi(khachHang);
+                    gioHang.setKhachHang(khachHang);
+                    gioHang1 = this.gioHangReopsitory.save(gioHang);
+                } else {
+                    gioHang1 = lstGioHang.get(0);
+                }
 
 //
-                    GioHangChiTietID gioHangChiTietID = new GioHangChiTietID(gioHang1, chiTietSP);
-                    GHCT ghct = new GHCT();
-                    ghct.setId(gioHangChiTietID);
-                    ghct.setDonGia(chiTietSP.getGiaBan());
-                    ghct.setSoLuong(1);
+                GioHangChiTietID gioHangChiTietID = new GioHangChiTietID(gioHang1, chiTietSP);
+                GHCT ghct = new GHCT();
+                ghct.setId(gioHangChiTietID);
+                ghct.setDonGia(chiTietSP.getGiaBan());
+                ghct.setSoLuong(1);
 
-                    GHCT ghct1 = this.gioHangChiTietRepository.save(ghct);
-                    this.session.setAttribute("maHoaDon", gioHang1.getMa());
-                    session.setAttribute("checkGioHang", 1);
+                GHCT ghct1 = this.gioHangChiTietRepository.save(ghct);
+                this.session.setAttribute("maHoaDon", gioHang1.getMa());
+                session.setAttribute("checkGioHang", 1);
 
             }
-            if(nhanVien != null){
+            if (nhanVien != null) {
                 HoaDon hoaDon = taoHoaDonMoi();
                 hoaDon.setNhanVien(nhanVien);
                 HoaDon x = this.hoaDonRepository.save(hoaDon);
@@ -221,7 +216,7 @@ private  GioHangReopsitory gioHangReopsitory;
                 this.session.setAttribute("maHoaDon", x.getMa());
 
             }
-            session.setAttribute("checkGioHang",1);
+            session.setAttribute("checkGioHang", 1);
 
         } else {
             // co ma hoa don
@@ -229,7 +224,7 @@ private  GioHangReopsitory gioHangReopsitory;
             // find hdct theo ma
             // lay ra ds hdct theo hd vs ctsp
             // neu co thi tang sl +1 / ko co thi tao moi hdct
-            if(khachHang != null){
+            if (khachHang != null) {
                 GioHang gioHang = gioHangReopsitory.findByMa(ma);
                 if (gioHang.getTinhTrang() == 1 || gioHang.getTinhTrang() == 2) {
                     session.setAttribute("valid", "chờ");
@@ -251,10 +246,10 @@ private  GioHangReopsitory gioHangReopsitory;
                 }
                 this.gioHangChiTietRepository.save(ghct);
             }
-            if(nhanVien != null){
+            if (nhanVien != null) {
                 HoaDon hoaDon = hoaDonRepository.findHoaDonByMa(ma);
-                if(hoaDon.getTinhTrang()==1 || hoaDon.getTinhTrang()==2){
-                    session.setAttribute("valid","hóa đơn đã xử lý");
+                if (hoaDon.getTinhTrang() == 1 || hoaDon.getTinhTrang() == 2) {
+                    session.setAttribute("valid", "hóa đơn đã xử lý");
                     return "redirect:/gio-hang";
                 }
                 List<HoaDonChiTiet> hoaDonChiTiets = hoaDon.getHoaDonChiTiets();
@@ -267,56 +262,50 @@ private  GioHangReopsitory gioHangReopsitory;
 
 //            Boolean checkNull = true;
                 // ktra hdct co ton tai ko
-                for (HoaDonChiTiet h: hoaDonChiTiets){
-                    if(h.getHoaDon().getId().equals(hoaDon.getId())
-                            && h.getChiTietSP().getId().equals(chiTietSP.getId())){
+                for (HoaDonChiTiet h : hoaDonChiTiets) {
+                    if (h.getHoaDon().getId().equals(hoaDon.getId())
+                            && h.getChiTietSP().getId().equals(chiTietSP.getId())) {
 //                    checkNull =false;
-                        hdct.setSoLuong(h.getSoLuong()+1);
+                        hdct.setSoLuong(h.getSoLuong() + 1);
                         break;
                     }
                 }
                 this.hoaDonChiTietRepository.save(hdct);
             }
 
-            session.setAttribute("checkGioHang",1);
+            session.setAttribute("checkGioHang", 1);
         }
-
-        if(khachHang !=null){
+        if (khachHang != null) {
             return "redirect:/khach-hang-home";
         }
         return "redirect:/admin";
-
     }
 
     @GetMapping("chonHD/{id}")
     public String chonHoaDon(
-            @PathVariable("id")HoaDon hoaDon
+            @PathVariable("id") HoaDon hoaDon
     ) {
         //
         // load ra gio hang + setMa hd( setSession maHD) the o hd
-
         session.setAttribute("maHoaDon", hoaDon.getMa());
         session.removeAttribute("valid");
-
         return "redirect:/gio-hang";
     }
 
     @GetMapping("loc")
     public String locHoaDon(
-            @RequestParam("trangThai")Integer trangThai
+            @RequestParam("trangThai") Integer trangThai
     ) {
-        NhanVien nhanVien =(NhanVien) session.getAttribute("acc");
-        KhachHang khachHang =(KhachHang) session.getAttribute("kh");
+        NhanVien nhanVien = (NhanVien) session.getAttribute("acc");
+        KhachHang khachHang = (KhachHang) session.getAttribute("kh");
 //        if(nhanVien == null){
 //            session.setAttribute("login","chưa đăng nhập");
 //            return "redirect:/admin";
 //        }
         // 1-all  2-dang 3-da 4-huy
-        session.setAttribute("tinhTrangHD",trangThai);
-
+        session.setAttribute("tinhTrangHD", trangThai);
 //        List<HoaDon> lstHoaDon = this.hoaDonRepository.findByTinhTrang(trangThai);
-
-        session.setAttribute("checkGioHang",1);
+        session.setAttribute("checkGioHang", 1);
         return "redirect:/gio-hang";
     }
 }

@@ -57,9 +57,4 @@ public class BanHangControl {
         return "home";
     }
 
-
-
-
-
-
 }
