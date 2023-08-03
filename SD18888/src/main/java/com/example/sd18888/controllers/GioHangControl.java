@@ -210,10 +210,7 @@ private  GioHangReopsitory gioHangReopsitory;
                 HoaDon hoaDon = taoHoaDonMoi();
                 hoaDon.setNhanVien(nhanVien);
                 HoaDon x = this.hoaDonRepository.save(hoaDon);
-                System.out.println(x.getMa());
-                System.out.println(x.getMa());
-                System.out.println(x.getMa());
-                System.out.println(x.getMa());
+
                 HoaDonChiTietID hoaDonChiTietID = new HoaDonChiTietID(x, chiTietSP);
                 HDCT hdct = new HDCT();
                 hdct.setId(hoaDonChiTietID);
