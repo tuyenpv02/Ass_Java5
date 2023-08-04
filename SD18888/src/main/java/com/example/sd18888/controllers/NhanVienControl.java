@@ -5,6 +5,7 @@ import com.example.sd18888.entities.CuaHang;
 import com.example.sd18888.entities.NhanVien;
 import com.example.sd18888.repositories.ChucVuRepository;
 import com.example.sd18888.repositories.CuaHangReopository;
+import com.example.sd18888.repositories.KhachHangRepository;
 import com.example.sd18888.repositories.NhanVienRepository;
 import com.example.sd18888.request.NhanVienVM;
 import jakarta.validation.Valid;
@@ -24,6 +25,8 @@ public class NhanVienControl {
 
     @Autowired
     private NhanVienRepository nvRepo;
+
+    private KhachHangRepository khRepo;
 
     @Autowired
     private CuaHangReopository chRepo;
@@ -83,6 +86,17 @@ public class NhanVienControl {
         } else {
             NhanVien nv = new NhanVien();
             nv.loadFormViewModel(nhanVienVM);
+            if(this.nvRepo.findByMa(nv.getMa()) != null || this.khRepo.findByMa(nv.getMa()) != null ){
+                List<ChucVu> lstChucVu = this.cvRepo.findAll();
+                List<CuaHang> lstCuaHang = this.chRepo.findAll();
+
+                model.addAttribute("lstCuaHang", lstCuaHang);
+                model.addAttribute("lstChucVu", lstChucVu);
+                model.addAttribute("status", "ma da ton tai");
+                model.addAttribute("data", nhanVienVM);
+                model.addAttribute("action", "/admin/nhan-vien/store");
+                return "admin/nhan_vien/create";
+            }
             this.nvRepo.save(nv);
             return "redirect:/admin/nhan-vien/index";
         }

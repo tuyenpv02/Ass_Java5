@@ -10,4 +10,6 @@ import java.util.UUID;
 public interface KhachHangRepository extends JpaRepository<KhachHang, UUID> {
 
     public KhachHang findByMaAndMatKhau(String ma, String matKhau);
+
+    public KhachHang findByMa(String ma);
 }

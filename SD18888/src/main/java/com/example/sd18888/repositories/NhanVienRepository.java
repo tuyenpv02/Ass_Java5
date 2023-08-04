@@ -10,4 +10,6 @@ import java.util.UUID;
 public interface NhanVienRepository extends JpaRepository<NhanVien, UUID> {
 
     public NhanVien findByMaAndMatKhau(String ma,String matKhau);
+
+    public NhanVien findByMa(String ma);
 }

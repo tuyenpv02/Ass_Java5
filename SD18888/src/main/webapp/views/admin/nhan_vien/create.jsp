@@ -19,7 +19,7 @@
 </head>
 <body>
 
-<h1>${action} -2 </h1>
+<h1> ${status}  </h1>
 
 <sf:form action="${action}" modelAttribute="data" method="post">
     <div class="row m-auto">
