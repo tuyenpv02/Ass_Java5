@@ -29,7 +29,7 @@ public class DongSP {
     @Column(name = "ten")
     private String ten;
 
-    public void loadDongSPViewModel(DongSPVM dongSPVM){
+    public void loadDongSPViewModel(DongSPVM dongSPVM) {
         this.setMa(dongSPVM.getMa());
         this.setTen(dongSPVM.getTen());
     }

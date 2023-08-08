@@ -51,7 +51,7 @@ public class NhanVienVM {
     @NonNull
     private Integer trangThai;
 
-    public void loadFormDomainModel(NhanVien nhanVien){
+    public void loadFormDomainModel(NhanVien nhanVien) {
         this.setMa(nhanVien.getMa());
         this.setTen(nhanVien.getTen());
         this.setHo(nhanVien.getHo());

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfig {
 
     @Bean
-    public ChiTietSPVM geChiTietSPVM(){
+    public ChiTietSPVM geChiTietSPVM() {
         ChiTietSPVM chiTietSPVM = new ChiTietSPVM();
         return chiTietSPVM;
     }

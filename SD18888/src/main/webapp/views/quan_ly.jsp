@@ -35,7 +35,7 @@
             <div class="col">
                 <a type="button" href="/admin/chi-tiet-sp/index" class="btn btn-secondary">chi tiết sp</a>
                 <a type="button" href="/admin/nhan-vien/index" class="btn btn-secondary">nhân viên</a>
-<%--                <a type="button" href="/admin/khach-hang/index" class="btn btn-secondary">khách hàng</a>--%>
+                <%--                <a type="button" href="/admin/khach-hang/index" class="btn btn-secondary">khách hàng</a>--%>
                 <a type="button" href="/admin/hoa-don/index" class="btn btn-secondary">Hóa đơn</a>
 
             </div>

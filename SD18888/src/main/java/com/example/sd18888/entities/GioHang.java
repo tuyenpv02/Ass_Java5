@@ -22,10 +22,10 @@ public class GioHang {
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IdKH",referencedColumnName = "id")
+    @JoinColumn(name = "IdKH", referencedColumnName = "id")
     private KhachHang khachHang;
 
-    @Column(name ="IdNV")
+    @Column(name = "IdNV")
     private UUID nhanVien;
 
     @Column(name = "Ma")

@@ -16,18 +16,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class HDCT  {
+public class HDCT {
 
     @EmbeddedId
     private HoaDonChiTietID id;
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "IdHoaDon", referencedColumnName = "id")
-//    private HoaDon hoaDon;
-//
-//    @Id
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "IdChiTietSP", referencedColumnName = "id")
-//    private ChiTietSP chiTietSP;
 
     @Column(name = "SoLuong")
     private Integer soLuong;

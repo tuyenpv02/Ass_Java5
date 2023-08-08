@@ -1,5 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 
 
 <nav class="navbar navbar-expand-lg navbar-dark mt-3 mb-5 shadow p-2" style="background-color: #607D8B">
@@ -29,19 +29,6 @@
                         <a class="nav-link text-white" href="#">${dsp.ten}</a>
                     </li>
                 </c:forEach>
-                <%--                <!-- Link -->--%>
-                <%--                <li class="nav-item acitve">--%>
-                <%--                    <a class="nav-link text-white" href="#">All</a>--%>
-                <%--                </li>--%>
-                <%--                <li class="nav-item">--%>
-                <%--                    <a class="nav-link text-white" href="#">Shirts</a>--%>
-                <%--                </li>--%>
-                <%--                <li class="nav-item">--%>
-                <%--                    <a class="nav-link text-white" href="#">Sport wears</a>--%>
-                <%--                </li>--%>
-                <%--                <li class="nav-item">--%>
-                <%--                    <a class="nav-link text-white" href="#">Outwears</a>--%>
-                <%--                </li>--%>
             </ul>
 
             <!-- Search -->

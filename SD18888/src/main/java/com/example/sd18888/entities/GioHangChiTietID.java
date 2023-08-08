@@ -15,6 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GioHangChiTietID {
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdGioHang", referencedColumnName = "id")
     private GioHang gioHang;
@@ -22,4 +23,5 @@ public class GioHangChiTietID {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdChiTietSP", referencedColumnName = "id")
     private ChiTietSP chiTietSP;
+
 }

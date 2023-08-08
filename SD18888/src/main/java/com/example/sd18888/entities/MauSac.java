@@ -17,6 +17,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MauSac {
+
     @Id
     @Column(name = "Id")
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -28,7 +29,7 @@ public class MauSac {
     @Column(name = "ten")
     private String ten;
 
-    public void loadMauSacViewModel(MauSacVM mauSacVM){
+    public void loadMauSacViewModel(MauSacVM mauSacVM) {
         this.setMa(mauSacVM.getMa());
         this.setTen(mauSacVM.getTen());
     }

@@ -56,7 +56,7 @@ public class KhachHang {
     @OneToMany(mappedBy = "khachHang")
     List<GioHang> gioHangList;
 
-    public void loadFormViewModel(KhachHangVM khachHangVM){
+    public void loadFormViewModel(KhachHangVM khachHangVM) {
         this.setMa(khachHangVM.getMa());
         this.setTen(khachHangVM.getTen());
         this.setHo(khachHangVM.getHo());

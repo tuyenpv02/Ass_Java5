@@ -43,7 +43,7 @@ public class KhachHangVM {
     @NotBlank(message = "mk khong dc de trống")
     private String matKhau;
 
-    public void loadFormDomainModel(KhachHang khachHang){
+    public void loadFormDomainModel(KhachHang khachHang) {
         this.setMa(khachHang.getMa());
         this.setTen(khachHang.getTen());
         this.setHo(khachHang.getHo());

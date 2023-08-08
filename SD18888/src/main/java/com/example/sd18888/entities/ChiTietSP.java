@@ -55,7 +55,7 @@ public class ChiTietSP {
     @OneToMany(mappedBy = "chiTietSP")
     List<HoaDonChiTiet> hoaDonChiTiets;
 
-    public void loadChiTietSPViewModel(ChiTietSPVM chiTietSPVM){
+    public void loadChiTietSPViewModel(ChiTietSPVM chiTietSPVM) {
         this.setMauSac(chiTietSPVM.getMauSac());
         this.setSanPham(chiTietSPVM.getSanPham());
         this.setDongSP(chiTietSPVM.getDongSP());

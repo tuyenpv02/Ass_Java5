@@ -23,9 +23,9 @@ import java.util.List;
 @Controller
 @RequestMapping("khach-hang-home")
 public class KhachHangHome {
+
     @Autowired
     private ChiTietSPRepository chiTietSPRepository;
-
 
     @Autowired
     private GioHangReopsitory gioHangReopsitory;

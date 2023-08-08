@@ -257,12 +257,9 @@ public class GioHangControl {
                 hdct.setDonGia(chiTietSP.getGiaBan());
                 hdct.setSoLuong(1);
 
-//            Boolean checkNull = true;
-                // ktra hdct co ton tai ko
                 for (HoaDonChiTiet h : hoaDonChiTiets) {
                     if (h.getHoaDon().getId().equals(hoaDon.getId())
                             && h.getChiTietSP().getId().equals(chiTietSP.getId())) {
-//                    checkNull =false;
                         hdct.setSoLuong(h.getSoLuong() + 1);
                         break;
                     }
@@ -282,7 +279,6 @@ public class GioHangControl {
     public String chonHoaDon(
             @PathVariable("id") HoaDon hoaDon
     ) {
-        //
         // load ra gio hang + setMa hd( setSession maHD) the o hd
         session.setAttribute("maHoaDon", hoaDon.getMa());
         session.removeAttribute("valid");
@@ -295,13 +291,9 @@ public class GioHangControl {
     ) {
         NhanVien nhanVien = (NhanVien) session.getAttribute("acc");
         KhachHang khachHang = (KhachHang) session.getAttribute("kh");
-//        if(nhanVien == null){
-//            session.setAttribute("login","chưa đăng nhập");
-//            return "redirect:/admin";
-//        }
+
         // 1-all  2-dang 3-da 4-huy
         session.setAttribute("tinhTrangHD", trangThai);
-//        List<HoaDon> lstHoaDon = this.hoaDonRepository.findByTinhTrang(trangThai);
         session.setAttribute("checkGioHang", 1);
         return "redirect:/gio-hang";
     }

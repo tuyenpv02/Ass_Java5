@@ -18,7 +18,7 @@ public class ChucVuVM {
     @NotBlank
     private String ten;
 
-    public void loadChucVuDomainModel(ChucVu chucVu){
+    public void loadChucVuDomainModel(ChucVu chucVu) {
         this.setMa(chucVu.getMa());
         this.setTen(chucVu.getTen());
     }

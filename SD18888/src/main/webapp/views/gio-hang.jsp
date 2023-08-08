@@ -171,9 +171,6 @@
                                 <li class="d-flex justify-content-between py-3 border-bottom"><strong
                                         class="text-muted">Tiền thừa</strong><strong> 00 $</strong></li>
 
-                                <%--                                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Phí vận chuyển</strong><strong>Free ship</strong></li>--%>
-                                <%--                                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">VAT</strong><strong>10 $</strong></li>--%>
-                                <%--                                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tổng thanh toán</strong>--%>
                                 <h5 class="font-weight-bold">
 
                                     <%--                                        <c:if test="${tongTienHang >500}">--%>

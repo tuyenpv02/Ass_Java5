@@ -28,8 +28,9 @@ public class SanPham {
     @Column(name = "ten")
     private String ten;
 
-    public void loadSanPhamViewModel(SanPhamVM sanPhamVM){
+    public void loadSanPhamViewModel(SanPhamVM sanPhamVM) {
         this.setMa(sanPhamVM.getMa());
         this.setTen(sanPhamVM.getTen());
     }
+
 }

@@ -18,7 +18,7 @@ public class SanPhamVM {
 
     private String ten;
 
-    public void loadSanPhamDomainModel(SanPham sanPham){
+    public void loadSanPhamDomainModel(SanPham sanPham) {
         this.setMa(sanPham.getMa());
         this.setTen(sanPham.getTen());
     }

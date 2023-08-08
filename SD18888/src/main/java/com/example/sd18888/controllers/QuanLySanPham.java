@@ -73,7 +73,6 @@ public class QuanLySanPham {
     public String store(
             ChiTietSPVM chiTietSPVM
     ) {
-        System.out.println("msss " + chiTietSPVM.toString());
         ChiTietSP chiTietSP = new ChiTietSP();
         chiTietSP.loadChiTietSPViewModel(chiTietSPVM);
         this.chiTietSPRepo.save(chiTietSP);

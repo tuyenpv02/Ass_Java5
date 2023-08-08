@@ -7,8 +7,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter
-@NoArgsConstructor @AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CuaHangVM {
 
     @NotBlank
@@ -26,12 +28,11 @@ public class CuaHangVM {
     @NotBlank
     private String quocGia;
 
-    public void loadFromDomainModel(CuaHang domain)
-    {
-        this.setTen( domain.getTen() );
-        this.setMa( domain.getMa() );
-        this.setDiaChi( domain.getDiaChi() );
-        this.setThanhPho( domain.getThanhPho() );
-        this.setQuocGia( domain.getQuocGia() );
+    public void loadFromDomainModel(CuaHang domain) {
+        this.setTen(domain.getTen());
+        this.setMa(domain.getMa());
+        this.setDiaChi(domain.getDiaChi());
+        this.setThanhPho(domain.getThanhPho());
+        this.setQuocGia(domain.getQuocGia());
     }
 }

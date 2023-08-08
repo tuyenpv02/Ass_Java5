@@ -22,11 +22,11 @@ public class HoaDon {
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IdKH",referencedColumnName = "id")
+    @JoinColumn(name = "IdKH", referencedColumnName = "id")
     private KhachHang khachHang;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IdNV",referencedColumnName = "id")
+    @JoinColumn(name = "IdNV", referencedColumnName = "id")
     private NhanVien nhanVien;
 
     @Column(name = "ma")

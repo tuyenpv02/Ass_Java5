@@ -20,7 +20,7 @@ public class MauSacVM {
     @NotBlank
     private String ten;
 
-    public void loadMauSacDomainModel(MauSac mauSac){
+    public void loadMauSacDomainModel(MauSac mauSac) {
         this.setMa(mauSac.getMa());
         this.setTen(mauSac.getTen());
     }

@@ -28,7 +28,7 @@ public class NSX {
     @Column(name = "ten")
     private String ten;
 
-    public void loadSNSXViewModel(NSXVM nsxvm){
+    public void loadSNSXViewModel(NSXVM nsxvm) {
         this.setMa(nsxvm.getMa());
         this.setTen(nsxvm.getTen());
     }

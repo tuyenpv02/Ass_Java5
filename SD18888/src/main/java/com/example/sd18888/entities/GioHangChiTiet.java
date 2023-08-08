@@ -34,5 +34,4 @@ public class GioHangChiTiet {
     private Double donGiaKhiGiam;
 
 
-
 }

@@ -13,17 +13,13 @@
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
             <ul class="navbar-nav m-auto">
-<%--                <li class="nav-item">--%>
-<%--&lt;%&ndash;                    <a class="nav-link" href="#">Manager Account</a>&ndash;%&gt;--%>
-<%--                </li>--%>
+
                 <c:if test="${sessionScope.acc !=null &&  sessionScope.acc.trangThai != null}">
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/quan-ly">Manager </a>
                     </li>
                 </c:if>
-<%--                <li class="nav-item">--%>
-<%--                    <a class="nav-link" href="#">Hello b</a>--%>
-<%--                </li>--%>
+
                 <c:if test="${sessionScope.acc !=null }">
                     <li class="nav-item"><a class="nav-link" href="/login/logout">Logout
                             ${sessionScope.acc.ma}</a></li>
@@ -35,9 +31,7 @@
                 <c:if test="${sessionScope.acc ==null && sessionScope.kh ==null}">
                     <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
                 </c:if>
-                <%--                <li class="nav-item">--%>
-                <%--                    <a class="nav-link" href="#">Login</a>--%>
-                <%--                </li>--%>
+
             </ul>
 
             <form action="search" method="post" class="form-inline my-2 my-lg-0">
@@ -61,7 +55,5 @@
 <section class="jumbotron text-center">
     <div class="container">
         ${login}
-        <%--        <h1 class="jumbotron-heading">Siêu thị giày chất lượng cao</h1>--%>
-        <%--        <p class="lead text-muted mb-0">Uy tín tạo nên thương hiệu với hơn 10 năm cung cấp các sản phầm giày nhập từ Trung Quốc</p>--%>
     </div>
 </section>

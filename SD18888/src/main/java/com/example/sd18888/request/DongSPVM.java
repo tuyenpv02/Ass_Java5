@@ -17,7 +17,7 @@ public class DongSPVM {
 
     private String ten;
 
-    public void loadDongSPDomainModel(DongSP dongSP){
+    public void loadDongSPDomainModel(DongSP dongSP) {
         this.setMa(dongSP.getMa());
         this.setTen(dongSP.getTen());
     }

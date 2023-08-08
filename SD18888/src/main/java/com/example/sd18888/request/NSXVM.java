@@ -20,7 +20,7 @@ public class NSXVM {
     @NotBlank
     private String ten;
 
-    public void loadNSXDomainModel(NSX nsx){
+    public void loadNSXDomainModel(NSX nsx) {
         this.setMa(nsx.getMa());
         this.setTen(nsx.getTen());
     }

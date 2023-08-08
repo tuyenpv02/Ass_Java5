@@ -49,12 +49,7 @@
         <table class="table table-striped table-hover">
             <thead>
             <tr>
-                <%--                <th>--%>
-                <%--                                <span class="custom-checkbox">--%>
-                <%--                                    <input type="checkbox" id="selectAll">--%>
-                <%--                                    <label for="selectAll"></label>--%>
-                <%--                                </span>--%>
-                <%--                </th>--%>
+
                 <th>stt</th>
                 <th>tên</th>
                 <th>nsx</th>
@@ -70,15 +65,9 @@
             </thead>
             <tbody>
             <%int i = 0;%>
-<%--            <c:forEach var="ct" items="${listProduct}" >--%>
-            <c:forEach items="${listProduct.content}" var="ct" >
-            <tr>
-                        <%--                    <td>--%>
-                        <%--                                    <span class="custom-checkbox">--%>
-                        <%--                                        <input type="checkbox" id="checkbox1" name="options[]" value="1">--%>
-                        <%--                                        <label for="checkbox1"></label>--%>
-                        <%--                                    </span>--%>
-                        <%--                    </td>--%>
+            <%--            <c:forEach var="ct" items="${listProduct}" >--%>
+            <c:forEach items="${listProduct.content}" var="ct">
+                <tr>
                     <td><%= ++i%>
                     </td>
                     <td>${ct.sanPham.ten}</td>
@@ -95,8 +84,6 @@
                                 class="material-icons"
                                 data-toggle="tooltip"
                                 title="Edit">&#xE254;</i></a>
-<%--                        <a href="/admin/quan-ly-san-pham/delete/${ct.id }" class="delete" data-toggle="modal"><i--%>
-<%--                                class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>--%>
                     </td>
                 </tr>
             </c:forEach>
@@ -114,12 +101,6 @@
                         </a>
                     </li>
                 </c:forEach>
-                <%--                <li class="page-item"><a href="#" class="page-link">1</a></li>--%>
-                <%--                <li class="page-item"><a href="#" class="page-link">2</a></li>--%>
-                <%--                <li class="page-item active"><a href="#" class="page-link">3</a></li>--%>
-                <%--                <li class="page-item"><a href="#" class="page-link">4</a></li>--%>
-                <%--                <li class="page-item"><a href="#" class="page-link">5</a></li>--%>
-                <%--                <li class="page-item"><a href="#" class="page-link">Next</a></li>--%>
             </ul>
         </div>
     </div>
@@ -174,15 +155,6 @@
                                 </c:forEach>
                             </select>
                         </div>
-                        <%--                        <div class="form-group col-2">--%>
-                        <%--                            <label>màu sắc</label>--%>
-                        <%--                            <select name="nauSac" class="form-select" aria-label="Default select example">--%>
-                        <%--                                <c:forEach items="${lstMauSac}" var="ms">--%>
-                        <%--                                    <option ${data.mauSac.id.equals(ms.id)?"selected":""}--%>
-                        <%--                                            value="${ms.id}">${ms.ten}</option>--%>
-                        <%--                                </c:forEach>--%>
-                        <%--                            </select>--%>
-                        <%--                        </div>--%>
                         <div class="form-group col-2">
                             <label>màu </label>
                             <select name="mauSac" class="form-select" aria-label="Default select example">
@@ -201,15 +173,6 @@
                             </select>
                         </div>
                     </div>
-                    <%--                    <div class="form-group">--%>
-                    <%--                        <label>Category</label>--%>
-                    <%--                        <select name="category" class="form-select" aria-label="Default select example">--%>
-
-                    <%--&lt;%&ndash;                            <c:forEach items="${listCategory }" var="ct">&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;                                <option value="${ct.cid }">${ct.cname }</option>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;                            </c:forEach>&ndash;%&gt;--%>
-                    <%--                        </select>--%>
-                    <%--                    </div>--%>
 
                 </div>
                 <div class="modal-footer">

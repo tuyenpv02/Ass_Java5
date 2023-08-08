@@ -10,7 +10,6 @@ public class QuanLy {
 
     @GetMapping("")
     public String index() {
-
         return "quan_ly";
     }
 }

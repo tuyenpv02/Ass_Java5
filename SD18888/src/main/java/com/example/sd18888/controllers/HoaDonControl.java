@@ -24,6 +24,7 @@ import java.util.List;
 @Controller
 @RequestMapping("admin/hoa-don")
 public class HoaDonControl {
+
     @Autowired
     private HoaDonRepository hoaDonRepository;
 
@@ -53,7 +54,6 @@ public class HoaDonControl {
     public String chonHoaDon(
             @PathVariable("id") HoaDon hoaDon
     ) {
-        //
         // load ra gio hang + setMa hd( setSession maHD) the o hd
         session.setAttribute("maHoaDon", hoaDon.getMa());
         session.removeAttribute("valid");
@@ -108,7 +108,6 @@ public class HoaDonControl {
 
                 this.gioHangChiTietRepository.delete(ghct);
             }
-//            hoaDonMoi2.setTinhTrang(0);
             return "redirect:/khach-hang-home";
         }
 
@@ -155,7 +154,6 @@ public class HoaDonControl {
             maHD = d.getMa().substring(2); // tra ve String con bat dau tu 2 ~'d'
             lstMax.add(Integer.parseInt(maHD));
         }
-        // sort
         Collections.sort(lstMax, (o1, o2) -> o2.compareTo(o1));
         return lstMax.get(0) + 1;
     }

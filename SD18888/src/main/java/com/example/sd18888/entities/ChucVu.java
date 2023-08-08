@@ -11,8 +11,10 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "ChucVu")
-@Getter@Setter
-@AllArgsConstructor@NoArgsConstructor
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ChucVu {
 
     @Id
@@ -21,13 +23,14 @@ public class ChucVu {
     public UUID id;
 
     @Column(name = "Ma")
-    private String  ma;
+    private String ma;
 
     @Column(name = "Ten")
     private String ten;
 
-    public void loadChucVuVM(ChucVuVM chucVuVM){
+    public void loadChucVuVM(ChucVuVM chucVuVM) {
         this.setMa(chucVuVM.getMa());
         this.setTen(chucVuVM.getTen());
     }
+
 }

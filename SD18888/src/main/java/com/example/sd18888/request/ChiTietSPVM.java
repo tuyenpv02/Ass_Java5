@@ -38,7 +38,7 @@ public class ChiTietSPVM {
     private double giaBan;
 
 
-    public void loadChiTietSPDomainModel(ChiTietSP chiTietSP){
+    public void loadChiTietSPDomainModel(ChiTietSP chiTietSP) {
         this.setMauSac(chiTietSP.getMauSac());
         this.setSanPham(chiTietSP.getSanPham());
         this.setDongSP(chiTietSP.getDongSP());

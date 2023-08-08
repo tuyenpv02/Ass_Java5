@@ -31,7 +31,8 @@
         <tbody>
         <c:forEach items="${lstHoaDonCT}" var="cv">
             <tr>
-                <td><%= ++i%> </td>
+                <td><%= ++i%>
+                </td>
                 <td>${cv.hoaDon.ma}</td>
                 <td>${cv.chiTietSP.moTa}</td>
                 <td>${cv.soLuong}</td>

@@ -62,7 +62,7 @@ public class NhanVien {
     @Column(name = "TrangThai")
     private Integer trangThai;
 
-    public void loadFormViewModel(NhanVienVM nhanVienVM){
+    public void loadFormViewModel(NhanVienVM nhanVienVM) {
         this.setMa(nhanVienVM.getMa());
         this.setTen(nhanVienVM.getTen());
         this.setHo(nhanVienVM.getHo());

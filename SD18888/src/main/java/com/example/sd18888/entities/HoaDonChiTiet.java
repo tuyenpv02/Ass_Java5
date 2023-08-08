@@ -14,8 +14,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class HoaDonChiTiet  {
-
+public class HoaDonChiTiet {
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)

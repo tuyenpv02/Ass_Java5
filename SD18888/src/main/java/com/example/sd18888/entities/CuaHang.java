@@ -11,8 +11,10 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "CuaHang")
-@Getter @Setter
-@NoArgsConstructor @AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CuaHang {
 
     @Id
@@ -34,11 +36,12 @@ public class CuaHang {
     @Column(name = "QuocGia")
     private String quocGia;
 
-    public void loadCuaHangVM(CuaHangVM vm){
-        this.setTen( vm.getTen() );
-        this.setMa( vm.getMa() );
-        this.setDiaChi( vm.getDiaChi() );
-        this.setThanhPho( vm.getThanhPho() );
-        this.setQuocGia( vm.getQuocGia() );
+    public void loadCuaHangVM(CuaHangVM vm) {
+        this.setTen(vm.getTen());
+        this.setMa(vm.getMa());
+        this.setDiaChi(vm.getDiaChi());
+        this.setThanhPho(vm.getThanhPho());
+        this.setQuocGia(vm.getQuocGia());
     }
+
 }
