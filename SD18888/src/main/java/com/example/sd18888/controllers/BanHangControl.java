@@ -41,17 +41,15 @@ public class BanHangControl {
     HttpSession session;
 
     @GetMapping("")
-    public String index(Model model
-            , @RequestParam(value = "page", defaultValue = "0") Integer pageNo) {
+    public String index(Model model, @RequestParam(value = "page", defaultValue = "0") Integer pageNo) {
         session = request.getSession();
         String ma = (String) session.getAttribute("maHoaDon");
         if (ma == null) {
             session.setAttribute("maHoaDon", "");
         }
-
         Pageable pageable = PageRequest.of(pageNo, 6);
         Page<ChiTietSP> ds = this.chiTietSPRepo.findAll(pageable);
-
+        
         model.addAttribute("lstDongSP", this.dspRepo.findAll());
         model.addAttribute("lstChiTietSP", ds);
         return "home";
